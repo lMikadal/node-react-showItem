@@ -8,7 +8,7 @@ function Dropdown() {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
-                <Menu.Button className="inline-flex justify-center w-full border-gray-300 px-4 py-2 text-xl font-medium text-gray-700" >
+                <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-xl text-gray-700" >
                     <span className="m-1 pr-1"><CgProfile /></span>
                     Profile
                     <span className="m-1"><IoIosArrowDown /></span>
