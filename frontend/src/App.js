@@ -1,11 +1,12 @@
+import Content from './componets/Content';
+import Navbar from './componets/Navbar';
 import './index.css';
 
 function App() {
     return (
-        <div className="">
-            <h1 className="text-green-600">
-                Hello world!
-            </h1>
+        <div>
+            <Navbar />
+            <Content />
         </div>
     );
 }
