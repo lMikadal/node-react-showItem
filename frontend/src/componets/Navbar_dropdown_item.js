@@ -1,4 +1,5 @@
-import { Menu } from '@headlessui/react'
+import { Menu } from '@headlessui/react';
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -6,18 +7,38 @@ function classNames(...classes) {
 
 function DropdownItem() {
     return (
-        <Menu.Item>
-            {({ active }) => (
-                <div
-                className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+        <>
+            <Menu.Item>
+                {({ active }) => (
+                    <Link 
+                    to="/manage"
+                    className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                        'block px-4 py-2 text-sm'
+                    )}
+                    >
+                        จัดการระบบ
+                    </Link>
                 )}
-                >
-                    test1
-                </div>
-            )}
-        </Menu.Item>
+            </Menu.Item>
+
+            <div className='px-2'>
+                <hr/>
+            </div>
+            
+            <Menu.Item>
+                {({ active }) => (
+                    <div
+                    className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                        'block px-4 py-2 text-sm'
+                    )}
+                    >
+                        Logout
+                    </div>
+                )}
+            </Menu.Item>
+        </>
     );
 }
 
