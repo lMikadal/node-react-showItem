@@ -3,7 +3,7 @@ import "@material-tailwind/react/tailwind.css";
 import Navbar from './componets/Navbar';
 import Content from './componets/Content';
 import Manage from './componets/Manage';
-import ManageItem from "./componets/Manage_item";
+import ManageItem from "./componets/Manage_items";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 

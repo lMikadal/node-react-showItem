@@ -1,17 +1,23 @@
-import Item from "./Content_item";
-import Sidebar from "./Manage_sidebar";
+import Card from "@material-tailwind/react/Card";
+import CardBody from "@material-tailwind/react/CardBody";
+import Paragraph from "@material-tailwind/react/Paragraph";
 
-function ManageItem() {
+function Item(props) {
+
+    const { item } = props;
+
     return (
-        <div className="relative min-h-screen flex">
-            <Sidebar /> 
-            <div className="flex-1 p-3">
-                <div className="grid grid-cols-4 gap-4">
-                    <Item />
-                </div>
-            </div>
-        </div>
+        <div className="w-auto">
+            <Card>
+                <CardBody>
+                    <h1 color="gray">{item.name}</h1>
+                    <Paragraph color="gray">
+                        {item.description}
+                    </Paragraph>
+                </CardBody>
+            </Card> 
+        </div> 
     );
 }
 
-export default ManageItem;
+export default Item;
