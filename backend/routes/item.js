@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
     const data = new Item( req.body )
-    console.log(data)
     data.save((err, data) => {
         if (err) return console.log(err)
         res.json(data)

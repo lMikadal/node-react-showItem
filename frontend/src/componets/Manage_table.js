@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
 
-
 function ManageTable() {
 
     const [showModal, setShowModal] = useState(false)
     const [items, setItems] = useState([])
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(0);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api')
@@ -15,6 +18,67 @@ function ManageTable() {
             setItems(response.data)
         })
     }, [])
+
+    function showModalEdit(data) {
+        axios.get('http://localhost:5000/api/edit/'+ data)
+        .then( response => {
+            setId(response.data._id)
+            setName(response.data.name)
+            setDescription(response.data.description)
+            setPrice(response.data.price)
+        })
+        setShowModal(true)
+    }
+
+    function deleteItem(data) {
+        axios.delete('http://localhost:5000/api/delete/'+ data)
+        
+        window.location.reload(false)
+    }
+
+    const inputName = e => {
+        setName(e.target.value)
+    }
+
+    const inputDescription = e => {
+        setDescription(e.target.value)
+    }
+
+    const inputPrice = e => {
+        setPrice(e.target.value)
+    }
+
+    const colseMoadal = () => {
+        setId('')
+        setName('')
+        setDescription('')
+        setPrice(0)
+        setShowModal(false)  
+    }
+
+    const editItem = e => {
+        e.preventDefault()
+        
+        const json = JSON.stringify({
+            name: name,
+            description: description,
+            price: Number(price)
+        });
+
+        axios.put('http://localhost:5000/api/updata/'+ id, json, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        setName('')
+        setId('')
+        setDescription('')
+        setPrice(0)
+        setShowModal(false)  
+        
+        window.location.reload(false)
+    }
 
     return (
         <>
@@ -60,10 +124,10 @@ function ManageTable() {
                                                 <div className="text-sm text-gray-900">{item.price}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <button className="bg-yellow-400 font-bold p-2 mb-4 rounded shadow hover:shadow-lg " type="button" onClick={() => setShowModal(true)}>Edit Item</button>
+                                                <button className="bg-yellow-400 font-bold p-2 mb-4 rounded shadow hover:shadow-lg " type="button" onClick={() => showModalEdit(item._id)}>Edit Item</button>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <button className="bg-red-400 p-2 font-bold mb-4 rounded shadow hover:shadow-lg ">Delete</button>
+                                                <button className="bg-red-400 p-2 font-bold mb-4 rounded shadow hover:shadow-lg" onClick={() => deleteItem(item._id)}>Delete</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -85,9 +149,10 @@ function ManageTable() {
                                             Form Edit Item
                                         </h3>
                                     </div>
-                                    <form>
+                                    <form onSubmit={editItem}>
                                         {/*body*/}
                                         <div className="relative p-6 flex-auto">
+                                            <input type="hidden" value={id}/>
                                             <h3 className="text-xl font-semibold my-2">
                                                 Name
                                             </h3>
@@ -97,6 +162,8 @@ function ManageTable() {
                                                 size="regular"
                                                 outline={true}
                                                 placeholder="name"
+                                                value={name}
+                                                onChange={inputName}
                                             />
                                             <h3 className="text-xl font-semibold my-2">
                                                 Description
@@ -106,6 +173,8 @@ function ManageTable() {
                                                 size="blue"
                                                 outline={true}
                                                 placeholder="description"
+                                                value={description}
+                                                onChange={inputDescription}
                                             />
                                             <h3 className="text-xl font-semibold my-2">
                                                 Price
@@ -116,6 +185,8 @@ function ManageTable() {
                                                 size="regular"
                                                 outline={true}
                                                 placeholder="price"
+                                                value={price}
+                                                onChange={inputPrice}
                                             />
                                         </div>
                                         {/*footer*/}
@@ -123,14 +194,13 @@ function ManageTable() {
                                             <button
                                                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                 type="button"
-                                                onClick={() => setShowModal(false)}
+                                                onClick={colseMoadal}
                                             >
                                                 Close
                                             </button>
                                             <button
                                                 className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="button"
-                                                onClick={() => setShowModal(false)}
+                                                type="submit"
                                             >
                                                 Save 
                                             </button>

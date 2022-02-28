@@ -49,7 +49,8 @@ function Manage() {
         setName('')
         setDescription('')
         setPrice(0)
-        setShowModal(false)      
+        setShowModal(false)   
+        window.location.reload(false)   
     }
     
     return (
