@@ -18,7 +18,7 @@ function ManageItem() {
             <Sidebar /> 
             <div className="flex-1 p-3">
                 <div className="grid grid-cols-4 gap-4">
-                    {items.map((data, index) => (
+                    {items.filter(data => data.show == "show").map((data, index) => (
                         <Item item={data} key={index} /> 
                     ))}
                 </div>

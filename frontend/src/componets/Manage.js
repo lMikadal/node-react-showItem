@@ -37,7 +37,8 @@ function Manage() {
         const json = JSON.stringify({
             name: name,
             description: description,
-            price: Number(price)
+            price: Number(price),
+            show: "show"
         });
 
         axios.post('http://localhost:5000/api/insert', json, {

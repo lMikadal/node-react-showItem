@@ -11,6 +11,7 @@ function ManageTable() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
+    const [show, setShow] = useState("sho");
 
     useEffect(() => {
         axios.get('http://localhost:5000/api')
@@ -33,6 +34,26 @@ function ManageTable() {
     function deleteItem(data) {
         axios.delete('http://localhost:5000/api/delete/'+ data)
         
+        window.location.reload(false)
+    }
+
+    function switchShow(id, sh) {
+        const json = (sh == "show") ? (
+            JSON.stringify({
+                show: "off"
+            })
+        ) : (    
+            JSON.stringify({
+                show: "show"
+            })
+        )        
+
+        axios.put('http://localhost:5000/api/updatashow/'+ id, json, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
         window.location.reload(false)
     }
 
@@ -99,6 +120,9 @@ function ManageTable() {
                                             price
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Show
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Edit
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -122,6 +146,9 @@ function ManageTable() {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm text-gray-900">{item.price}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <button className="bg-blue-400 p-2 font-bold mb-4 rounded shadow hover:shadow-lg" onClick={() => switchShow(item._id, item.show)}>{item.show}</button>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <button className="bg-yellow-400 font-bold p-2 mb-4 rounded shadow hover:shadow-lg " type="button" onClick={() => showModalEdit(item._id)}>Edit Item</button>

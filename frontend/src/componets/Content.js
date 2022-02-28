@@ -15,7 +15,7 @@ function Content() {
     return (
         <div className='max-w-7xl mx-auto px-4 py-4'>
             <div className="grid grid-cols-4 gap-4">
-                {items.map((data, index) => (
+                {items.filter(data => data.show == "show").map((data, index) => (
                     <Item item={data} key={index} /> 
                 ))}
             </div>

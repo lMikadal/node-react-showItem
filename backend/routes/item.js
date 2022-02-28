@@ -34,6 +34,14 @@ router.put('/updata/:id', (req, res) => {
     })
 })
 
+router.put('/updataShow/:id', (req, res) => {
+    Item.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+        if(err) console.log(err)
+        res.json(data)
+        console.log("updatashow success!!")
+    })
+})
+
 router.delete('/delete/:id', (req,res) => {
     Item.findByIdAndDelete(req.params.id, (err, data) =>{
         if(err) console.log(err)

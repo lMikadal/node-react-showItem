@@ -22,7 +22,8 @@ mongoose.connect(dbUrl, {
 let itemSchema = mongoose.Schema({
     name: String,
     description: String,
-    price: Number
+    price: Number,
+    show: String
 })
 
 // สร้างโมเดล
