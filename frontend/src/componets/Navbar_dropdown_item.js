@@ -1,11 +1,30 @@
 import { Menu } from '@headlessui/react';
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import Session from "../data/Data";
+import axios from "axios";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 function DropdownItem() {
+    const { user } = useContext(Session)
+
+    const logout = () => {
+        const json = JSON.stringify({
+            status: 0
+        });
+        
+        axios.put('http://localhost:5000/apiuser/logout/'+ user, json, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        window.location.href = "/";
+    }
+
     return (
         <>
             <Menu.Item>
@@ -33,6 +52,7 @@ function DropdownItem() {
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm'
                     )}
+                    onClick={logout}
                     >
                         Logout
                     </div>

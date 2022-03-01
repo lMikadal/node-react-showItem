@@ -41,7 +41,7 @@ function Manage() {
             show: "show"
         });
 
-        axios.post('http://localhost:5000/api/insert', json, {
+        axios.post('http://localhost:5000/apiitem/insert', json, {
             headers: {
                 'Content-Type': 'application/json'
             }

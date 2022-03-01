@@ -11,17 +11,16 @@ function ManageTable() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
-    const [show, setShow] = useState("sho");
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api')
+        axios.get('http://localhost:5000/apiitem')
         .then( response => {
             setItems(response.data)
         })
     }, [])
 
     function showModalEdit(data) {
-        axios.get('http://localhost:5000/api/edit/'+ data)
+        axios.get('http://localhost:5000/apiitem/edit/'+ data)
         .then( response => {
             setId(response.data._id)
             setName(response.data.name)
@@ -32,13 +31,13 @@ function ManageTable() {
     }
 
     function deleteItem(data) {
-        axios.delete('http://localhost:5000/api/delete/'+ data)
+        axios.delete('http://localhost:5000/apiitem/delete/'+ data)
         
         window.location.reload(false)
     }
 
     function switchShow(id, sh) {
-        const json = (sh == "show") ? (
+        const json = (sh === "show") ? (
             JSON.stringify({
                 show: "off"
             })
@@ -48,7 +47,7 @@ function ManageTable() {
             })
         )        
 
-        axios.put('http://localhost:5000/api/updatashow/'+ id, json, {
+        axios.put('http://localhost:5000/apiitem/updatashow/'+ id, json, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -86,7 +85,7 @@ function ManageTable() {
             price: Number(price)
         });
 
-        axios.put('http://localhost:5000/api/updata/'+ id, json, {
+        axios.put('http://localhost:5000/apiitem/updata/'+ id, json, {
             headers: {
                 'Content-Type': 'application/json'
             }

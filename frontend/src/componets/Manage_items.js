@@ -7,7 +7,7 @@ function ManageItem() {
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api')
+        axios.get('http://localhost:5000/apiitem')
         .then( response => {
             setItems(response.data)
         })

@@ -14,7 +14,7 @@ router.post('/insert', (req, res) => {
     data.save((err, data) => {
         if (err) return console.log(err)
         res.json(data)
-        console.log("insert success!!")
+        console.log("insertItem success!!")
     })
 })
 
