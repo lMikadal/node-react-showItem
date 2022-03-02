@@ -20,7 +20,7 @@ function Navbar() {
                             <Dropdown/>
                         </div>
                     ) : (
-                        <div>
+                        <div className="px-4 py-2 text-xl text-gray-700">
                             <Link to="/login">Login</Link>
                         </div>
                     )}

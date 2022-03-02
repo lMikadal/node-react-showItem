@@ -12,9 +12,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 
 function App() {
-    const [session, setSession] = useState({
-        
-    });
+    const [session, setSession] = useState({});
 
     useEffect(() => {
         axios.get('http://localhost:5000/apiuser/user/'+ 1)
@@ -22,12 +20,14 @@ function App() {
             response.data == null ? (
                 setSession({
                     login: false,
-                    user: ""
+                    userID: "",
+                    userName: ""
                 })
             ) : (
                 setSession({
                     login: true,
-                    user: response.data._id
+                    userID: response.data._id,
+                    userName: response.data.username
                 }) 
             )   
         })

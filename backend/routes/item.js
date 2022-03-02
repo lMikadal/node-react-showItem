@@ -9,12 +9,18 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/user/:user', (req, res) => {
+    Item.find({user : req.params.user}, (err, data) => {
+        if(err) console.log(err)
+        res.json(data)
+    })
+})
+
 router.post('/insert', (req, res) => {
     const data = new Item( req.body )
     data.save((err, data) => {
         if (err) return console.log(err)
         res.json(data)
-        console.log("insertItem success!!")
     })
 })
 
@@ -22,7 +28,6 @@ router.get('/edit/:id', (req, res) => {
     Item.findOne({_id: req.params.id}, (err, data) => {
         if(err) console.log(err)
         res.json(data)
-        console.log("show edit success!!")
     })
 })
 
@@ -30,7 +35,6 @@ router.put('/updata/:id', (req, res) => {
     Item.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
         if(err) console.log(err)
         res.json(data)
-        console.log("updata success!!")
     })
 })
 
@@ -38,14 +42,12 @@ router.put('/updataShow/:id', (req, res) => {
     Item.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
         if(err) console.log(err)
         res.json(data)
-        console.log("updatashow success!!")
     })
 })
 
 router.delete('/delete/:id', (req,res) => {
     Item.findByIdAndDelete(req.params.id, (err, data) =>{
         if(err) console.log(err)
-        console.log("delete success!!")
     })
 })
 

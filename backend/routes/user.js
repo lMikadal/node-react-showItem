@@ -13,7 +13,6 @@ router.get('/user/:status', (req, res) => {
     User.findOne({status : req.params.status}, (err, data) => {
         if(err) console.log(err)
         res.json(data)
-        console.log("show success!!")
     })
 })
 
@@ -22,7 +21,6 @@ router.post('/register', (req, res) => {
     data.save((err, data) => {
         if (err) return console.log(err)
         res.json(data)
-        console.log("Register success!!")
     })
 })
 
@@ -34,7 +32,6 @@ router.put('/login/:name/:pass', (req, res) => {
             User.findByIdAndUpdate(data._id, req.body, (err, data) => {
                 if(err) console.log(err)
                 res.json(data)
-                console.log("updata success!!")
             }) 
         }     
     })
@@ -44,7 +41,6 @@ router.put('/logout/:id', (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
         if(err) console.log(err)
         res.json(data)
-        console.log("updata success!!")
     }) 
 })
 

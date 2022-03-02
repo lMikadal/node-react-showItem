@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
+import Session from "../data/Data";
 
 function ManageTable() {
-
+    const { userID } = useContext(Session)
     const [showModal, setShowModal] = useState(false)
     const [items, setItems] = useState([])
     const [id, setId] = useState('');
@@ -13,7 +14,7 @@ function ManageTable() {
     const [price, setPrice] = useState(0);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/apiitem')
+        axios.get('http://localhost:5000/apiitem/user/'+ userID)
         .then( response => {
             setItems(response.data)
         })
@@ -157,12 +158,15 @@ function ManageTable() {
                                             </td>
                                         </tr>
                                     ))}
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+               
             </div>
+            
             {showModal ? (
                     <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">

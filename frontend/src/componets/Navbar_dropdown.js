@@ -1,16 +1,19 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
 import DropdownItem from './Navbar_dropdown_item';
+import Session from "../data/Data";
 
 function Dropdown() {
+    const { userName } = useContext(Session)
+
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-xl text-gray-700" >
                     <span className="m-1 pr-1"><CgProfile /></span>
-                    Profile
+                    {userName}
                     <span className="m-1"><IoIosArrowDown /></span>
                 </Menu.Button>
             </div>

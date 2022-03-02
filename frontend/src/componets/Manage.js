@@ -1,11 +1,13 @@
-import Sidebar from "./Manage_sidebar";
-import ManageTable from "./Manage_table";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import Input from "@material-tailwind/react/Input";
 import Textarea from "@material-tailwind/react/Textarea";
+import Sidebar from "./Manage_sidebar";
+import ManageTable from "./Manage_table";
+import Session from "../data/Data";
 
 function Manage() {
+    const { userID } = useContext(Session)
 
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState('');
@@ -38,7 +40,8 @@ function Manage() {
             name: name,
             description: description,
             price: Number(price),
-            show: "show"
+            show: "show",
+            user: userID
         });
 
         axios.post('http://localhost:5000/apiitem/insert', json, {

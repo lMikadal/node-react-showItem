@@ -9,14 +9,14 @@ function classNames(...classes) {
 }
 
 function DropdownItem() {
-    const { user } = useContext(Session)
+    const { userID } = useContext(Session)
 
     const logout = () => {
         const json = JSON.stringify({
             status: 0
         });
         
-        axios.put('http://localhost:5000/apiuser/logout/'+ user, json, {
+        axios.put('http://localhost:5000/apiuser/logout/'+ userID, json, {
             headers: {
                 'Content-Type': 'application/json'
             }

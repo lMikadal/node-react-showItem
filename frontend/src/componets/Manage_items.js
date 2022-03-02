@@ -1,13 +1,15 @@
+import axios from "axios";
+import { useEffect, useState, useContext } from "react";
+import Session from "../data/Data";
 import Item from "./Manage_item";
 import Sidebar from "./Manage_sidebar";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 function ManageItem() {
+    const { userID } = useContext(Session)
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/apiitem')
+        axios.get('http://localhost:5000/apiitem/user/'+ userID)
         .then( response => {
             setItems(response.data)
         })
